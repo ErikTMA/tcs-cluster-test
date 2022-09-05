@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: customer-clusters
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  retryInterval: 10s
+  dependsOn:
+    - name: infrastructure
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: /environments/dev/customer-clusters
+  prune: true
+  wait: true
